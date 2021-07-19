@@ -1,7 +1,7 @@
 from models.location import Location
 import sqlite3
 import json
-from models import Employee, employee
+from models import Employee
 
 EMPLOYEES = [
 {
@@ -169,11 +169,27 @@ def delete_employee(id):
         EMPLOYEES.pop(employee_index)
 
 def update_employee(id, new_employee):
-    # Iterate the ANIMALS list, but use enumerate() so that
-    # you can access the index value of each item.
-    for index, employee in enumerate(EMPLOYEES):
-        if employee["id"] == id:
-            # Found the animal. Update the value.
-            EMPLOYEES[index] = new_employee
-            break
+    with sqlite3.connect("./kennel.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE employee
+            SET
+                name = ?,
+                address = ?,
+                location_id = ?
+        WHERE id = ?
+        """, (new_employee['name'], new_employee['address'],
+              new_employee['location_id'], id, ))
+
+        # Were any rows affected?
+        # Did the client send an `id` that exists?
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        # Forces 404 response by main module
+        return False
+    else:
+        # Forces 204 response by main module
+        return True
 

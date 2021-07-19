@@ -100,7 +100,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_customer(id)}"
                 else:
                     response = f"{get_all_customers()}"
-            elif resource == "emplyees":
+            elif resource == "employees":
                 if id is not None:
                     response = f"{get_single_employee(id)}"
                 else:
@@ -191,6 +191,12 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "animals":
             success = update_animal(id, post_body)
+        elif resource == "customers":
+            success = update_customer(id, post_body)
+        elif resource == "employees":
+            success = update_employee(id, post_body)
+        elif resource == "locations":
+            success = update_location(id, post_body)
         # rest of the elif's
 
         if success:
@@ -199,7 +205,6 @@ class HandleRequests(BaseHTTPRequestHandler):
             self._set_headers(404)
 
         self.wfile.write("".encode())
-
 
     def do_DELETE(self):
         # Set a 204 response code
