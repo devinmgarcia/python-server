@@ -3,34 +3,6 @@ import json
 from models import Animal
 
 
-ANIMALS = [
-    {
-        "id": 1,
-        "name": "Snickers",
-        "breed": "Dog",
-        "location_id": 1,
-        "customer_id": 4,
-        "status": "Admitted"
-    },
-    {
-        "id": 2,
-        "name": "Gypsy",
-        "breed": "Dog",
-        "location_id": 1,
-        "customer_id": 2,
-        "status": "Admitted"
-    },
-    {
-        "id": 3,
-        "name": "Blue",
-        "breed": "Cat",
-        "location_id": 2,
-        "customer_id": 1,
-        "status": "Admitted"
-    }
-]
-
-
 def get_all_animals():
     # Open a connection to the database
     with sqlite3.connect("./kennel.db") as conn:
