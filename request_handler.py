@@ -1,5 +1,5 @@
 from animals.request import get_animals_by_location
-from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from locations.request import delete_location
 from animals import get_all_animals, get_single_animal, get_animals_by_location, get_animals_by_status, create_animal, delete_animal, update_animal
 from customers import get_all_customers, get_single_customer, get_customers_by_email, create_customer, delete_customer, update_customer
